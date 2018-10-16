@@ -2,4 +2,11 @@
 
 // Add fish to "Basket"
 
-// Load
+// Load Fish
+$.get('../db/fishes.json')
+.done((data) => {
+    console.log(data);
+})
+.fail((error) => {
+    console.log({error});
+});
