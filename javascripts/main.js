@@ -1,7 +1,14 @@
-// Filter fish that are "on sale"
+const discount = .12;
 
-// Add fish to "Basket"
+const applySale = () => {
+    $(".on-sale").each((i, fish) => {
+        const fullPrice = $(fish).find('.price');
+        const newPrice = (parseInt(fullPrice.html()) * (1 - discount)).toFixed(2);
+        fullPrice.html(newPrice);
+    })
+};
 
+// Add fish to the 'Basket'
 const writeFishes = (arrayOfFishes) => {
     let domString = '';
     arrayOfFishes.forEach((fish) => {
@@ -46,7 +53,7 @@ const writeFishes = (arrayOfFishes) => {
 $('body').on('click', 'button.add', (e) => {
     const fishToMove = $(e.target).closest('.fish');
     $("#snagged").append(fishToMove);
-    $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
+    $(e.target).text('Remove From Basket').addClass('remove').removeClass('add');
 });
 
 $('body').on('click', 'button.remove', (e) => {
@@ -57,13 +64,20 @@ $('body').on('click', 'button.remove', (e) => {
 
 $("#show-sale").click(() => {
     $(".fish").not(".on-sale").toggle();
+    $("#show-sale").text((i, text) => {
+        if (text === "Show Sale Fish") {
+            return "Show All Fish"
+        } else {
+            return "Show Sale Fish";
+        }
+    });
 });
 
 // Load Fish
 $.get('../db/fishes.json')
 .done((data) => {
-    // console.log(data);
     writeFishes(data.fishes);
+    applySale();
 })
 .fail((error) => {
     console.log({error});
