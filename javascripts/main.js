@@ -25,7 +25,18 @@ const writeFishes = (arrayOfFishes) => {
     })
     // Write to the available div
     $("#available").append(domString);
-}
+    bindEvents();
+};
+
+const bindEvents = () => {
+    $(".add").on('click', (e) => {
+        // what is the div that has the fish. let's move it to 'snagged' div
+        const fishToMove = $(e.target).closest('.fish');
+        $("#snagged").append(fishToMove);
+        // button text is now removed from the Basket, and remove class "add", and add class "remove"
+        $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
+    });
+};
 
 // Load Fish
 $.get('../db/fishes.json')
@@ -36,3 +47,4 @@ $.get('../db/fishes.json')
 .fail((error) => {
     console.log({error});
 });
+
