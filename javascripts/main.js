@@ -46,7 +46,7 @@ const writeFishes = (arrayOfFishes) => {
 $('body').on('click', 'button.add', (e) => {
     const fishToMove = $(e.target).closest('.fish');
     $("#snagged").append(fishToMove);
-    $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
+    $(e.target).text('Remove From Basket').addClass('remove').removeClass('add');
 });
 
 $('body').on('click', 'button.remove', (e) => {
@@ -57,6 +57,13 @@ $('body').on('click', 'button.remove', (e) => {
 
 $("#show-sale").click(() => {
     $(".fish").not(".on-sale").toggle();
+    $("#show-sale").text((i, text) => {
+        if (text === "Show Sale Fish") {
+            return "Show All Fish"
+        } else {
+            return "Show Sale Fish";
+        }
+    });
 });
 
 // Load Fish
