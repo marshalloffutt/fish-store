@@ -30,13 +30,18 @@ const writeFishes = (arrayOfFishes) => {
 
 const bindEvents = () => {
     $(".add").on('click', (e) => {
-        // what is the div that has the fish. let's move it to 'snagged' div
         const fishToMove = $(e.target).closest('.fish');
         $("#snagged").append(fishToMove);
-        // button text is now removed from the Basket, and remove class "add", and add class "remove"
-        $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
+        $(e.target).text('Remove From Basket').addClass('remove').removeClass('add');
+
+        $(".remove").on('click', (e) => {
+            const fishToRestock = $(e.target).closest('.fish');
+            $("#available").append(fishToRestock);
+            $(e.target).text('Add To Basket').addClass('add').removeClass('remove');
+        });
     });
 };
+
 
 // Load Fish
 $.get('../db/fishes.json')
