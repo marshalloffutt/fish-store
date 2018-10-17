@@ -25,28 +25,44 @@ const writeFishes = (arrayOfFishes) => {
     })
     // Write to the available div
     $("#available").append(domString);
-    bindEvents();
+    // bindEvents();
 };
 
-const bindEvents = () => {
-    $(".add").on('click', (e) => {
-        const fishToMove = $(e.target).closest('.fish');
-        $("#snagged").append(fishToMove);
-        $(e.target).text('Remove From Basket').addClass('remove').removeClass('add');
+// This is the dumb way
+// const bindEvents = () => {
+//     $(".add").on('click', (e) => {
+//         const fishToMove = $(e.target).closest('.fish');
+//         $("#snagged").append(fishToMove);
+//         $(e.target).text('Remove From Basket').addClass('remove').removeClass('add');
+//         $(".remove").on('click', (e) => {
+//             const fishToRestock = $(e.target).closest('.fish');
+//             $("#available").append(fishToRestock);
+//             $(e.target).text('Add To Basket').addClass('add').removeClass('remove');
+//         });
+//     });
+// };
 
-        $(".remove").on('click', (e) => {
-            const fishToRestock = $(e.target).closest('.fish');
-            $("#available").append(fishToRestock);
-            $(e.target).text('Add To Basket').addClass('add').removeClass('remove');
-        });
-    });
-};
+// Dynamically listen for events that happen on buttons with a class of add
+$('body').on('click', 'button.add', (e) => {
+    const fishToMove = $(e.target).closest('.fish');
+    $("#snagged").append(fishToMove);
+    $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
+});
 
+$('body').on('click', 'button.remove', (e) => {
+    const fishToMove = $(e.target).closest('.fish');
+    $("#available").append(fishToMove);
+    $(e.target).text('Add To Basket').addClass('add').removeClass('remove');
+});
+
+$("#show-sale").click(() => {
+    $(".fish").not(".on-sale").toggle();
+});
 
 // Load Fish
 $.get('../db/fishes.json')
 .done((data) => {
-    console.log(data);
+    // console.log(data);
     writeFishes(data.fishes);
 })
 .fail((error) => {
