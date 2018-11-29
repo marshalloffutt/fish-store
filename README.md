@@ -7,6 +7,6 @@ This was an in-class code-along exercise where we made an entirely underwhelming
   - Add fish to their basket
   - Remove fish from their basket.
   
-The interesting thing about this project was that it serves as our first introduction to[jQuery](http://jquery.com/) to do all of the DOM interaction.
+The interesting thing about this project was that it serves as our first introduction to [jQuery](http://jquery.com/) to do all of the DOM interaction.
 
 ![End Result](https://raw.githubusercontent.com/nss-evening-cohort-7/fish-store/master/Grab.png)
